@@ -1,0 +1,20 @@
+language: ruby
+sudo: required
+
+env:
+  global:
+    - ORACLE_COOKIE=sqldev
+    - ORACLE_FILE=oracle11g/xe/oracle-xe-11.2.0-1.0.x86_64.rpm.zip
+    - ORACLE_HOME=/u01/app/oracle/product/11.2.0/xe
+    - ORACLE_SID=XE
+
+cache:
+  - directories:
+    - $HOME/.cache
+
+before_install:
+  - mkdir -p $HOME/.cache && cp -rt $HOME/.cache .travis/oracle
+  - test -f "$HOME/.cache/oracle/$( basename $ORACLE_FILE )" || $HOME/.cache/oracle/download.sh
+  - $HOME/.cache/oracle/install.sh
+
+script: make
