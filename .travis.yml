@@ -10,11 +10,11 @@ env:
 
 cache:
   - directories:
-    - $HOME/.cache
+    - .cache
 
 before_install:
-  - mkdir -p $HOME/.cache && cp -rt $HOME/.cache .travis/oracle
-  - test -f "$HOME/.cache/oracle/$( basename $ORACLE_FILE )" || $HOME/.cache/oracle/download.sh
-  - $HOME/.cache/oracle/install.sh
+  - mkdir -p .cache && cp -rt .cache .travis/oracle
+  - test -f ".cache/oracle/$( basename $ORACLE_FILE )" || .cache/oracle/download.sh
+  - .cache/oracle/install.sh
 
 script: make
