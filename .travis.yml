@@ -4,6 +4,7 @@ sudo: required
 env:
   global:
     - ORACLE_COOKIE=sqldev
+    - ORACLE_DOWNLOAD_DIR=.cache/oracle
     - ORACLE_FILE=oracle11g/xe/oracle-xe-11.2.0-1.0.x86_64.rpm.zip
     - ORACLE_HOME=/u01/app/oracle/product/11.2.0/xe
     - ORACLE_SID=XE
@@ -13,14 +14,7 @@ cache:
     - .cache/oracle
 
 before_install:
-  - >
-    if [ -f ".cache/oracle/$( basename $ORACLE_FILE )" ]; then
-      cp -t .travis/oracle ".cache/oracle/$( basename $ORACLE_FILE )"
-    else
-      .travis/oracle/download.sh
-      mkdir -p .cache/oracle
-      cp -t .cache/oracle ".travis/oracle/$( basename $ORACLE_FILE )"
-    fi
+  - test -f "${ORACLE_DOWNLOAD_DIR}/$( basename $ORACLE_FILE )" || .travis/oracle/download.sh
   - .travis/oracle/install.sh
 
 script: make

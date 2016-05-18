@@ -1,5 +1,6 @@
 #!/bin/sh -e
 
+[ -z "$ORACLE_DOWNLOAD_DIR" ] || ORACLE_DOWNLOAD_DIR="$(readlink -f "$ORACLE_DOWNLOAD_DIR")/"
 [ -n "$ORACLE_FILE" ] || { echo "Missing ORACLE_FILE environment variable!"; exit 1; }
 [ -n "$ORACLE_HOME" ] || { echo "Missing ORACLE_HOME environment variable!"; exit 1; }
 
@@ -18,7 +19,7 @@ test -f /sbin/chkconfig ||
 
 test -d /var/lock/subsys || sudo mkdir /var/lock/subsys
 
-unzip -jo "$(basename $ORACLE_FILE)" "*/$ORACLE_RPM"
+unzip -j "${ORACLE_DOWNLOAD_DIR}$(basename $ORACLE_FILE)" "*/$ORACLE_RPM"
 sudo rpm --install --nodeps --nopre "$ORACLE_RPM"
 
 echo 'OS_AUTHENT_PREFIX=""' | sudo tee -a "$ORACLE_HOME/config/scripts/init.ora" > /dev/null

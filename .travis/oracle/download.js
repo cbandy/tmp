@@ -73,7 +73,7 @@ Phantom.createAsync({ parameters: { 'ssl-protocol': 'tlsv1' } }).then(function (
             '--cookie-jar', env['COOKIES'],
             '--data', '@-',
             '--location',
-            '--output', require('path').basename(env['ORACLE_FILE']),
+            '--output', env['ORACLE_DOWNLOAD_DIR'] + require('path').basename(env['ORACLE_FILE']),
             '--user-agent', env['USER_AGENT'],
             form.action
           ]];
