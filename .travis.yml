@@ -4,7 +4,7 @@ sudo: required
 
 
 script:
-  - command -v nvm
-  - /bin/sh -c 'command -v nvm'
   - nvm --version
   - node --version
+  - /bin/sh -c 'command -v nvm || . "$NVM_DIR/nvm.sh" && nvm install node'
+  - /bin/sh -c 'node --version'
