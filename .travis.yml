@@ -2,9 +2,6 @@ language: generic
 dist: trusty
 sudo: required
 
-
 script:
-  - nvm --version
-  - node --version
-  - /bin/sh -c 'command -v nvm || . "$NVM_DIR/nvm.sh" && bash -c "nvm install node" && node --version'
-  - /bin/sh -c 'node --version'
+  - command -v phantomjs
+  - phantomjs --version
