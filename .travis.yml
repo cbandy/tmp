@@ -2,6 +2,7 @@ language: generic
 dist: trusty
 sudo: required
 
+
 script:
   - command -v phantomjs
   - phantomjs --version
